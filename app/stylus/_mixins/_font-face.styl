@@ -1,0 +1,17 @@
+font-url(folder, file)
+  path = '../fonts/' + folder + '/' + file
+  return path
+
+font-include(family, folder, file, hack-chrome-windows = false, weight = 'normal')
+  @font-face
+    font-family family
+    src url(font-url(folder, file + '.eot'))
+    src url(font-url(folder, file + '.eot?#iefix')) format('embedded-opentype'), url(font-url(folder, file + '.woff')) format('woff'), url(font-url(folder, file + '.ttf')) format('truetype')
+    font-weight weight
+    font-style normal
+
+  if hack-chrome-windows
+    @media screen and (-webkit-min-device-pixel-ratio:0)
+      @font-face
+        font-family family
+        src url(font-url(file + '.svg#'+ family)) format('svg')
